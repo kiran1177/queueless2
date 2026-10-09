@@ -1,0 +1,22 @@
+# Environment variables and secrets
+
+.env
+.env.*
+!.env.example
+
+# Python virtual environments and generated files
+
+venv/
+.venv/
+**pycache**/
+*.pyc
+
+# JavaScript dependencies and build files
+
+node_modules/
+dist/
+build/
+
+# Editor settings
+
+.vscode/

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QueueLess Government Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Hind+Vadodara:wght@400;500;600&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1B2559;--mute:#5E6A8A;--line:#D9E2EF;--bg:#F3F7FC;--pap:#fff;--saf:#F28C1B;--grn:#138A4A;--red:#B3372F;--d:'Poppins','Hind Vadodara','Hind',sans-serif}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.5 'Poppins','Hind Vadodara','Hind','Noto Sans Gujarati','Noto Sans Devanagari',system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--saf);outline-offset:2px}
+.hide{display:none!important}small,.note{color:var(--mute)}
+h2,h3{font-family:var(--d);letter-spacing:-.01em}h3{font-size:16px;margin:14px 0 8px}
+.brand{font:700 26px var(--d);letter-spacing:-.02em}.brand i{font-style:normal;color:var(--saf)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}
+.seg button{border:0;background:none;padding:5px 12px}.seg button.on{background:var(--ink);color:#fff}
+.pri{background:var(--saf);color:#1a1205;border:0;padding:10px 16px;border-radius:5px;font-weight:600}
+.sec{background:#fff;border:1px solid var(--ink);padding:8px 14px;border-radius:5px}
+button:disabled{opacity:.5;cursor:default}
+/* login */
+#login{min-height:100vh;display:grid;grid-template-columns:1.1fr 1fr}
+.lp{background:#EDF3FB;padding:44px 48px 0;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.lp>*{position:relative}.lp .brand{margin-top:34px}.lf{margin:0 -48px;width:calc(100% + 96px)}.rp{background:#fff}
+.lp .big{font-size:96px}.lcap{margin-top:18px;color:var(--mute);max-width:380px}
+.rp{padding:44px 8vw;display:flex;flex-direction:column;justify-content:center;gap:14px;max-width:560px}
+#lg1{align-self:flex-end;margin-bottom:auto}.lp .slip{--notch:#EDF3FB}
+.rp h1{font:700 32px/1.15 var(--d);letter-spacing:-.02em}
+label{display:flex;flex-direction:column;gap:4px;font-weight:500}
+input,select{border:1px solid var(--line);border-radius:5px;padding:10px 12px;background:#fff}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row input{flex:1;min-width:120px}
+.err{color:var(--red);min-height:22px;font-size:15px;font-weight:600}
+/* slip */
+.slip{border-top:5px solid;border-image:linear-gradient(90deg,var(--saf) 33.3%,#DDE5F2 33.3% 66.6%,var(--grn) 66.6%) 1;--notch:var(--bg);background:var(--pap);border-radius:3px;padding:22px 26px;display:grid;grid-template-columns:1fr auto;gap:22px;box-shadow:0 1px 0 #0002;color:var(--ink)}
+.slip .big{font:700 84px/1 var(--d);letter-spacing:-.03em;margin:4px 0}.big.sm{font-size:48px}
+.lbl{font-size:13px;color:var(--mute)}.svc{font-weight:600;font-size:17px}
+.stub{position:relative;border-left:2px dashed #b4c0cf;margin:-22px 0;padding:22px 0 22px 24px;min-width:190px;display:flex;flex-direction:column;justify-content:center}
+.stub:before,.stub:after{content:"";position:absolute;left:-11px;width:20px;height:20px;border-radius:50%;background:var(--notch)}
+.stub:before{top:-10px}.stub:after{bottom:-10px}
+.n2{font:700 28px/1.15 var(--d);margin-bottom:8px}.n2.sa{color:#B85F0A}
+.pill{display:inline-block;padding:2px 11px;border-radius:99px;font-size:13px;background:#E3E9F1;margin:8px 6px 0 0}
+.pill.serve,.pill.ok{background:#D5EDE0;color:#14603a}.pill.called{background:#FFE3BF;color:#8a4a06}.pill.missed{background:#F6D7D4;color:var(--red)}
+/* theme */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:18px}.st{display:flex;gap:12px;align-items:center;padding:14px;border-radius:10px;border:1px solid var(--line)}.st b{display:block;font:700 24px/1.2 var(--d)}.st small{display:block;font-size:12px}
+.ic{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:#fff;flex:none}.st.b{background:#E8F1FD}.st.p{background:#F0EBFC}.st.o{background:#FFF3E4}.st.g{background:#E6F5EC}
+.ban{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-radius:10px;padding:22px 26px 0;margin-bottom:18px;background:linear-gradient(100deg,#FFF1DC,#EAF3FF 55%,#DCEBFF);overflow:hidden}.ban>div{align-self:center;padding-bottom:22px}.ban h2{font-size:28px}.ban .fort{width:min(46%,380px);flex:none}.sc{font-style:italic;color:var(--grn);font-weight:500;margin-top:8px}
+.assure{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;margin-top:26px;font-weight:500}.assure span:before{content:'';display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;background:var(--grn)}.assure span:nth-child(2):before{background:var(--saf)}.assure span:nth-child(3):before{background:#1D6FE0}
+.calw{max-width:310px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#F8FAFD}.cm{display:flex;justify-content:space-between;align-items:center}.cm button{border:0;background:none;font-size:22px;padding:0 10px}.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-top:6px}.cg button{border:0;border-radius:50%;aspect-ratio:1;background:none}.cg button:not(:disabled):hover{background:#E3F4E9}.cg button.on{background:var(--saf);font-weight:700}.cg button:disabled{color:#b3bdcf;cursor:default}.av{background:var(--saf);color:#fff;font:700 22px var(--d);width:54px;height:54px}
+.lh{font:700 40px/1.15 var(--d);letter-spacing:-.02em;margin:0 0 12px}.lq{background:#fff;border-radius:14px;padding:14px 16px;max-width:380px;box-shadow:0 10px 30px #1b255922;margin-top:24px}.lq .row2{display:flex;gap:8px;margin-top:10px}.lq .row2 span{flex:1;text-align:center;padding:7px 0;border-radius:6px;background:#EAF2FD;font:600 13px var(--d)}.lq .row2 .you{background:var(--saf)}.lq .row2 span:first-child{background:#D5EDE0;color:#14603a;animation:pl 2s infinite}@keyframes pl{50%{opacity:.5}}@media(prefers-reduced-motion:reduce){.lq .row2 span{animation:none!important}}.lf3{list-style:none;margin-top:22px;display:grid;gap:8px;font-weight:500}.lf3 li:before{content:'\2713';color:var(--grn);font-weight:700;margin-right:10px}
+/* app */
+.app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.rail{background:linear-gradient(#fff 55%,#FFF1DE);padding:78px 14px 24px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden;border-right:1px solid var(--line)}.rail>*{position:relative;z-index:1}.lp:before,.rail:before,.rail:after{content:'';position:absolute;left:0;top:0;width:100%;height:92px;background:linear-gradient(155deg,#F28C1B 0 20%,#fff 20% 30%,#138A4A 30% 42%,transparent 42%);pointer-events:none}.rail:after{top:auto;bottom:0;background:linear-gradient(335deg,#F28C1B 0 20%,#fff 20% 30%,#138A4A 30% 42%,transparent 42%)}.brand svg{width:34px;height:34px;vertical-align:-8px;margin-right:8px;color:#1D3FA8}.brand i{color:var(--grn)}
+.rail .sub{color:var(--mute);margin:0 0 24px;font-size:13px}
+.rail nav{display:flex;flex-direction:column;gap:2px}
+.rail nav button{background:none;border:0;text-align:left;padding:10px 12px;color:inherit;display:flex;justify-content:space-between;align-items:center;border-left:3px solid transparent}
+.rail nav button.on{background:#E3F4E9;border-left-color:var(--grn);color:#0E6B39;font-weight:600;border-radius:0 8px 8px 0}
+.bd{background:var(--saf);color:#1a1205;border-radius:9px;font-size:12px;padding:0 7px;font-weight:600}
+.rfoot{margin:auto 0 70px;font-size:13px;color:var(--ink);text-align:center}
+.top{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:12px 28px;border-bottom:1px solid var(--line);background:#fff}.srch{flex:1;min-width:180px;max-width:380px;border-radius:99px;background:#EAF2FD;border-color:transparent}
+.clk{font:700 22px var(--d)}.top .gap{flex:1}
+main{padding:24px 28px 48px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:24px;align-items:start}.col{display:flex;flex-direction:column;gap:18px;min-width:0}
+.pn{background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 8px #1b255914;padding:16px 18px}.pn p{margin-top:6px}
+.lane{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;list-style:none}
+.lane li{min-width:92px;border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:4px;display:flex;flex-direction:column;font-size:13px}
+.lane li b{font:700 17px var(--d)}.lane .serve,.lane .called{border-color:var(--grn);background:#E5F3EB}
+.lane .me{border:2px solid var(--saf);background:#FFF1E0}.lane em{font-style:normal;color:#B85F0A;font-weight:600}
+.why{color:var(--mute);font-size:14px;max-width:70ch}
+.svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.svcs>div{border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}.s0{background:#FFF3E4}.s1{background:#E8F1FD}.s2{background:#F0EBFC}.s3{background:#E6F5EC}.gb{border:0;border-radius:6px;padding:8px 12px;color:#fff;font-weight:600;margin-top:6px}.s0 .gb{background:#F28C1B}.s1 .gb{background:#1D6FE0}.s2 .gb{background:#7B3FD6}.s3 .gb{background:#138A4A}
+.cs{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E3E9F1;gap:8px}.cs:last-child{border:0}
+.off{color:var(--mute)}
+.log li{list-style:none;padding:6px 0;border-bottom:1px solid #E3E9F1;font-size:14px}.log small{display:block}
+.bar{height:10px;background:#E3E9F1;border-radius:5px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--saf)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.warn{color:var(--red)}
+.ck{list-style:none}.ck li{padding:5px 0 5px 28px;position:relative}
+.ck li:before{content:"";position:absolute;left:0;top:9px;width:15px;height:15px;border:2px solid var(--ink);border-radius:3px}
+.ck li.on:before{background:var(--grn);border-color:var(--grn)}.ck li{cursor:pointer}
+.top2{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.top2 h2{margin-right:auto}
+table{width:100%;border-collapse:collapse}td,th{padding:7px 8px;border-bottom:1px solid #E3E9F1;text-align:left;font-weight:500}th{color:var(--mute);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.nt{padding:10px 14px;border-left:4px solid var(--line);background:#fff;margin-bottom:8px}.nt.call{border-color:var(--saf)}.nt.warn{border-color:var(--red)}.nt.ok{border-color:var(--grn)}
+.modal{position:fixed;inset:0;background:#12203Acc;display:grid;place-items:center;z-index:9}
+.box{background:#fff;border-radius:6px;padding:22px;width:min(380px,92vw)}.qrw{display:grid;place-items:center;margin:12px 0;border:1px solid var(--line)}
+#toasts{position:fixed;left:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;z-index:10;max-width:360px}
+#toasts div{background:var(--ink);color:#fff;padding:10px 14px;border-left:4px solid var(--saf);border-radius:3px;font-size:14px}
+@media(max-width:960px){#login{grid-template-columns:1fr}.lp{display:none}.app{grid-template-columns:1fr}.rail:before,.rail:after{display:none}.rail{position:relative;padding:12px;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px}.rail .sub,.rfoot{display:none}.rail nav{flex-direction:row;flex-wrap:wrap}.grid,.grid2{grid-template-columns:1fr}.slip{grid-template-columns:1fr}.stub{border-left:0;border-top:2px dashed #b4c0cf;margin:0 -26px;padding:18px 26px 0}.stub:before{left:-10px;top:-11px}.stub:after{left:auto;right:-10px;bottom:auto;top:-11px}main,.top{padding-left:16px;padding-right:16px}}
+</style></head><body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="chakra" viewBox="0 0 48 48"><g fill="none" stroke="currentColor"><circle cx="24" cy="24" r="21" stroke-width="3"/><circle cx="24" cy="24" r="11.5" stroke-width="19" stroke-dasharray="1.3 1.7"/></g><circle cx="24" cy="24" r="3.5" fill="currentColor"/></symbol><symbol id="fort" viewBox="0 0 400 130"><path d="M199 2v26" stroke="#5E6A8A"/><path d="M199 2h20v5h-20z" fill="#F28C1B"/><path d="M199 7h20v5h-20z" fill="#fff"/><path d="M199 12h20v5h-20z" fill="#138A4A"/><g fill="#C75B34"><rect x="6" y="84" width="388" height="46"/><rect x="110" y="50" width="180" height="40"/><rect x="36" y="60" width="40" height="28"/><rect x="324" y="60" width="40" height="28"/></g><g fill="#F1E6D2"><ellipse cx="200" cy="38" rx="24" ry="20"/><ellipse cx="128" cy="44" rx="13" ry="12"/><ellipse cx="272" cy="44" rx="13" ry="12"/><ellipse cx="56" cy="54" rx="11" ry="11"/><ellipse cx="344" cy="54" rx="11" ry="11"/></g><path fill="#8F3A1C" d="M60 130v-22a10 10 0 0 1 20 0v22zM110 130v-22a10 10 0 0 1 20 0v22zM160 130v-26a10 10 0 0 1 20 0v26zM220 130v-26a10 10 0 0 1 20 0v26zM270 130v-22a10 10 0 0 1 20 0v22zM320 130v-22a10 10 0 0 1 20 0v22zM188 130v-34a12 12 0 0 1 24 0v34z"/></symbol></svg>
+
+<section id="login">
+ <div class="lp">
+  <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#chakra"/></svg>Queue<i>Less</i></div>
+  <div>
+   <h2 class="lh">Skip the line.<br>Not the service.</h2>
+   <p class="lcap">Take a token from home and walk in when your turn is near.</p>
+   <div class="lq"><small>Live queue, Birth certificate</small>
+    <div class="row2"><span>T-014</span><span>T-015</span><span>T-016</span><span class="you">You</span></div>
+    <small style="display:block;margin-top:10px">T-014 is at Counter 2. About 24 min until your turn.</small></div>
+   <ul class="lf3"><li>Pick a date and time slot</li><li>Track your wait in real time</li><li>Check in with a QR code</li></ul>
+  </div>
+  <div><svg class="fort lf" viewBox="0 0 400 130" aria-hidden="true"><use href="#fort"/></svg></div>
+ </div>
+ <div class="rp" onkeydown="if(event.key==='Enter')doLogin()">
+  <div class="seg" id="lg1"></div>
+  <h1 data-i="login_h"></h1><p class="note" data-i="login_s"></p>
+  <div class="seg" id="roles" style="align-self:flex-start"></div>
+  <label><span data-i="mobile"></span><input id="mob" inputmode="numeric" value="98765 43210" autocomplete="off"></label>
+  <label><span data-i="otp"></span><span class="row"><input id="otp" inputmode="numeric" maxlength="4" autocomplete="off"><button type="button" class="sec" onclick="sendCode()" data-i="sendcode"></button></span></label>
+  <div class="err" id="lerr" role="alert"></div>
+  <button class="pri" type="button" onclick="doLogin()" data-i="signin"></button>
+  <small>Demo only: any 10-digit number works, the code is 4821.</small>
+ </div>
+</section>
+
+<div id="app" class="app hide">
+ <aside class="rail"><div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#chakra"/></svg>Queue<i>Less</i></div><div class="sub">Government office</div><nav id="nav"></nav>
+  <div class="rfoot"><i>Serve the People,<br>Build a Better Tomorrow</i><br><small>सत्यमेव जयते</small></div></aside>
+ <div>
+  <header class="top"><input class="srch" placeholder="Search services, tokens, documents" aria-label="Search"><span class="clk" id="clk"></span>
+   <span class="seg" id="spd"><button onclick="setPause()" id="pz" aria-label="Pause or resume">||</button><button onclick="setSpd(1)" data-s="1">1x</button><button onclick="setSpd(3)" data-s="3">3x</button><button onclick="setSpd(10)" data-s="10">10x</button></span><small>Demo clock, 1 s = x min</small>
+   <span class="gap"></span><span class="seg" id="lg2"></span><button class="sec" id="who" onclick="go('profile')"></button><button class="sec" onclick="signOut()" data-i="signout"></button></header>
+  <main id="main"></main>
+ </div>
+</div>
+<div id="modal" class="modal hide"></div><div id="toasts" aria-live="polite"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const D={en:{hello:'Hello',yourTok:'Your token',ahead:'People ahead',wait:'Estimated wait',arrive:'Arrive by',checkin:'Scan QR at office',checkedin:'Checked in',release:'Release token',why:'How we estimated this',genTok:'Generate token',service:'Service',capacity:'Tokens issued today',peak:'Load across the day',callnext:'Call next',complete:'Complete',walkin:'Add walk-in token',signout:'Sign out',signin:'Sign in',sendcode:'Send code',mobile:'Mobile number',otp:'4-digit code',role_citizen:'Citizen',role_staff:'Staff',role_admin:'Admin',nav_home:'Home',nav_token:'Get token',nav_docs:'Documents',nav_notif:'Notifications',nav_desk:'Staff desk',recent:'Recent activity',svcs:'Government services',login_h:'Sign in to QueueLess',login_s:'Take a token from home. Come to the office only when your turn is close.',counters:'Counter',avgtime:'Average time',queue:'Queue lane',st_wait:'Waiting',st_called:'Called',st_serve:'Being served',st_done:'Completed',st_missed:'Missed',sv_birth:'Birth certificate',sv_dl:'Driving licence',sv_dv:'Document verification',sv_pp:'Passport service',min:'min',office:'Office status',slot:'Arrival slot',first:'First available',date:'Date',nav_profile:'Profile',st_book:'Booked',st_cancel:'Released'},
+gu:{hello:'નમસ્તે',yourTok:'તમારો ટોકન',ahead:'તમારી આગળ',wait:'અંદાજિત રાહ',arrive:'આ સમયે પહોંચો',checkin:'ઓફિસમાં QR સ્કેન કરો',checkedin:'ચેક-ઇન થઈ ગયું',release:'ટોકન છોડી દો',why:'આ અંદાજ કેવી રીતે બન્યો',genTok:'ટોકન બનાવો',service:'સેવા',capacity:'આજે અપાયેલા ટોકન',peak:'દિવસભરની ભીડ',callnext:'આગળનો બોલાવો',complete:'પૂર્ણ કરો',walkin:'વૉક-ઇન ટોકન ઉમેરો',signout:'સાઇન આઉટ',signin:'સાઇન ઇન',sendcode:'કોડ મોકલો',mobile:'મોબાઇલ નંબર',otp:'4 અંકનો કોડ',role_citizen:'નાગરિક',role_staff:'સ્ટાફ',role_admin:'એડમિન',nav_home:'હોમ',nav_token:'ટોકન મેળવો',nav_docs:'દસ્તાવેજો',nav_notif:'સૂચનાઓ',nav_desk:'સ્ટાફ ડેસ્ક',recent:'તાજેતરની પ્રવૃત્તિ',svcs:'સરકારી સેવાઓ',login_h:'QueueLess માં સાઇન ઇન કરો',login_s:'ઘરેથી ટોકન લો. વારો નજીક આવે ત્યારે જ ઓફિસ આવો.',counters:'કાઉન્ટર',avgtime:'સરેરાશ સમય',queue:'કતાર',st_wait:'રાહમાં',st_called:'બોલાવ્યો',st_serve:'સેવામાં',st_done:'પૂર્ણ',st_missed:'ચૂકી ગયા',sv_birth:'જન્મ પ્રમાણપત્ર',sv_dl:'ડ્રાઇવિંગ લાઇસન્સ',sv_dv:'દસ્તાવેજ ચકાસણી',sv_pp:'પાસપોર્ટ સેવા',min:'મિનિટ',office:'ઓફિસ સ્થિતિ',slot:'આવવાનો સમય',first:'સૌથી વહેલું ઉપલબ્ધ',date:'તારીખ',nav_profile:'પ્રોફાઇલ',st_book:'બુક થયું'},
+hi:{hello:'नमस्ते',yourTok:'आपका टोकन',ahead:'आपसे आगे',wait:'अनुमानित प्रतीक्षा',arrive:'इस समय तक पहुँचें',checkin:'कार्यालय में QR स्कैन करें',checkedin:'चेक-इन हो गया',release:'टोकन छोड़ें',why:'यह अनुमान कैसे बना',genTok:'टोकन बनाएँ',service:'सेवा',capacity:'आज जारी टोकन',peak:'दिनभर की भीड़',callnext:'अगला बुलाएँ',complete:'पूर्ण करें',walkin:'वॉक-इन टोकन जोड़ें',signout:'साइन आउट',signin:'साइन इन',sendcode:'कोड भेजें',mobile:'मोबाइल नंबर',otp:'4 अंकों का कोड',role_citizen:'नागरिक',role_staff:'स्टाफ',role_admin:'एडमिन',nav_home:'होम',nav_token:'टोकन लें',nav_docs:'दस्तावेज़',nav_notif:'सूचनाएँ',nav_desk:'स्टाफ डेस्क',recent:'हाल की गतिविधि',svcs:'सरकारी सेवाएँ',login_h:'QueueLess में साइन इन करें',login_s:'घर से टोकन लें। बारी पास आने पर ही कार्यालय आएँ।',counters:'काउंटर',avgtime:'औसत समय',queue:'कतार',st_wait:'प्रतीक्षा में',st_called:'बुलाया गया',st_serve:'सेवा में',st_done:'पूर्ण',st_missed:'छूट गया',sv_birth:'जन्म प्रमाणपत्र',sv_dl:'ड्राइविंग लाइसेंस',sv_dv:'दस्तावेज़ सत्यापन',sv_pp:'पासपोर्ट सेवा',min:'मिनट',office:'कार्यालय स्थिति',slot:'आने का समय',first:'सबसे पहले उपलब्ध',date:'तारीख',nav_profile:'प्रोफ़ाइल',st_book:'बुक हुआ'}};
+let lang='en',role='citizen',view='home',T=642,speed=1,paused=false,auto=true,chk=false,near=false,lastAbs=null,timer=null,CAP=20;
+const t=k=>D[lang][k]||D.en[k]||k,tn=k=>t('sv_'+k),p=n=>String(n).padStart(3,'0');
+const hm=m=>{m=Math.round(m);const h=Math.floor(m/60)%24;return (h%12||12)+':'+String(m%60).padStart(2,'0')+(h<12?' AM':' PM')};
+const pf=m=>m<600?1.1:m<720?1.3:m<840?1:m<900?.9:1.15;
+const SV={birth:{m:11,docs:['Hospital birth record','Parents Aadhaar cards','Marriage certificate of parents','Address proof']},dl:{m:18,docs:['Learner licence','Aadhaar card','Passport-size photo','Medical form (Form 1)']},dv:{m:8,docs:['Originals of all documents','One self-attested copy of each','Aadhaar card']},pp:{m:22,docs:['Aadhaar card','Birth proof','Address proof','Old passport, if renewing']}};
+const keys=Object.keys(SV),DOCS={};
+const C=[1,2,3].map(id=>({id,active:true,tok:null}));
+let Q=[],nextN=16,log=[],N=[];
+const pat=['birth','dl','dv','birth','dl','pp','birth','dl'];
+[1,2,3,4].forEach(n=>Q.push({n,svc:pat[n],src:n%4?'online':'walk-in',st:'done'}));
+[[5,6],[6,11],[7,3]].forEach(([n,r],i)=>{const o={n,svc:pat[n],src:'online',st:'serve',c:i+1,rem:r,base:SV[pat[n]].m};Q.push(o);C[i].tok=o});
+for(let n=8;n<=15;n++)Q.push({n,svc:pat[n%8],src:n%4?'online':'walk-in',st:'wait',mine:n===13,slot:n>13?750:0});
+log=[{t:T-6,msg:'T-004 completed, Driving licence'},{t:T-14,msg:'Counter 3 opened for the morning rush'}];
+N=[{t:T-95,msg:'Documents verified for Birth certificate',k:'ok',new:1},{t:T-60,msg:'Token T-013 generated. We will alert you before your turn.',k:'info',new:1},{t:T-14,msg:'Counter 3 opened. Waiting times have been recalculated.',k:'info',new:1}];
+
+const TDd=new Date();TDd.setHours(0,0,0,0);const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),TD=ymd(TDd),MAXd=new Date(TDd.getTime()+30*864e5),fd=k=>new Date(k+'T00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'}),issuedOn=d=>d===TD?nextN-1:Q.filter(x=>x.date===d&&x.st!=='cancel').length;let selD=TD,cm=null,mobile='',TR=25;
+const key=x=>(x.slot||0)*1000+x.n,SLOTCAP=2,slotN=(v,dt)=>Q.filter(x=>x.slot===v&&(x.date||TD)===(dt||TD)&&!['cancel','missed'].includes(x.st)).length;
+function slotOpts(dt){dt=dt||TD;const fu=dt!==TD;let o=fu?'':`<option value="0">${t('first')}</option>`;for(let v=fu?540:Math.ceil((T+15)/30)*30;v<=990;v+=30){if(v>=780&&v<840)continue;const l=SLOTCAP-slotN(v,dt);o+=`<option value="${v}" ${l<=0?'disabled':''}>${hm(v)} to ${hm(v+30)}, ${l>0?l+' left':'full'}</option>`}return o}
+/* ---- prediction engine: greedy counter simulation, EWMA service time, hourly load factor, break skipping ---- */
+const me=()=>Q.find(x=>x.mine&&['wait','called','serve','book'].includes(x.st));
+function est(){const m=me();if(!m)return null;if(m.st==='book')return{wait:9999,ahead:0,m};if(m.st!=='wait')return{wait:0,ahead:0,m};
+ const act=C.filter(c=>c.active);let free=act.length?act.map(c=>c.tok?Math.max(c.tok.st==='serve'?c.tok.rem:c.tok.grace,0):0):[9999];
+ const sb=s=>{const a=T+s;return a>=780&&a<840?840-T:s};let brk=false,sum=0;
+ const ah=Q.filter(x=>['wait','serve','called'].includes(x.st)&&key(x)<key(m)),w=ah.filter(x=>x.st==='wait').sort((a,b)=>key(a)-key(b));
+ w.forEach(x=>{const i=free.indexOf(Math.min(...free)),pr=Math.max(free[i],(x.slot||0)-T),s=sb(pr);if(s!==pr)brk=true;sum+=SV[x.svc].m;free[i]=s+SV[x.svc].m*pf(T+s)});
+ const s0=Math.max(Math.min(...free),(m.slot||0)-T),s=sb(s0);if(s!==s0)brk=true;
+ return{wait:s,ahead:ah.length,m,avg:w.length?sum/w.length:0,nw:w.length,pf:pf(T),cn:act.length,brk}}
+
+/* ---- simulation ---- */
+function say(msg,k){N.unshift({t:T,msg,k:k||'info',new:1});toast(msg);badge()}
+function lg(msg){log.unshift({t:T,msg});log.length=Math.min(log.length,6)}
+function fin(c){const x=c.tok;x.st='done';const b=x.base||SV[x.svc].m;SV[x.svc].m=+(SV[x.svc].m*.7+b*.3).toFixed(1);lg(`T-${p(x.n)} completed, ${tn(x.svc)}`);if(x.mine)say('Service complete. Your token is marked completed.','ok');c.tok=null}
+function callNext(c){if(c.tok||!c.active)return;const x=Q.filter(y=>y.st==='wait'&&(y.slot||0)<=T).sort((a,b)=>key(a)-key(b))[0];if(!x)return;c.tok=x;x.c=c.id;
+ if(x.mine&&!chk){x.st='called';x.grace=5;say(`Your turn. T-${p(x.n)} is called at Counter ${c.id}. Scan the QR at the office within 5 minutes.`,'call');return}
+ x.st='serve';x.base=SV[x.svc].m*(.6+Math.random()*.8);x.rem=Math.max(2,Math.round(x.base*pf(T)));
+ if(x.mine)say(`Counter ${c.id} is serving you now.`,'call')}
+function step(){T++;C.forEach(c=>{const x=c.tok;if(!x)return;
+  if(x.st==='serve'){if(--x.rem<=0)fin(c)}
+  else if(x.st==='called'){if(chk){x.st='serve';x.base=SV[x.svc].m;x.rem=Math.round(x.base*pf(T));say(`Checked in. Proceed to Counter ${c.id}.`,'ok')}else if(--x.grace<=0){x.st='missed';say(`Grace period over. T-${p(x.n)} is marked missed and the queue moved on. Take a new token.`,'warn');c.tok=null}}});
+ if(auto)C.forEach(callNext);
+ const m=me();if(m&&m.st==='wait'){const e=est();
+  if(e.wait<=TR+15&&!near){near=true;say(`Time to leave. ${e.ahead} ahead of T-${p(m.n)} and you are about ${TR} min from the office.`,'call')}
+  if(lastAbs!=null&&e.wait<9000&&Math.abs(T+e.wait-lastAbs)>=10){say(`Estimated wait changed to about ${Math.round(e.wait)} min.`,'warn');lastAbs=T+e.wait}}}
+function tick(){if(paused)return;for(let i=0;i<speed;i++)step();paint()}
+function setSpd(s){speed=s;paused=false;spd()}function setPause(){paused=!paused;spd()}
+function spd(){$$('#spd [data-s]').forEach(b=>b.classList.toggle('on',+b.dataset.s===speed&&!paused));$('#pz').classList.toggle('on',paused)}
+
+/* ---- ui ---- */
+function toast(m){const d=document.createElement('div');d.textContent=m;$('#toasts').append(d);setTimeout(()=>d.remove(),6500)}
+function badge(){const n=N.filter(x=>x.new).length;const b=$('#nb');if(b){b.textContent=n;b.classList.toggle('hide',!n)}}
+function applyLang(){$$('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+ const lgb=['en:EN','gu:ગુજ','hi:हिं'].map(x=>{const[k,l]=x.split(':');return `<button class="${k===lang?'on':''}" onclick="setLang('${k}')">${l}</button>`}).join('');$('#lg1').innerHTML=lgb;$('#lg2').innerHTML=lgb;
+ $('#roles').innerHTML=['citizen','staff','admin'].map(r=>`<button type="button" class="${r===role?'on':''}" onclick="setRole('${r}')">${t('role_'+r)}</button>`).join('')}
+function setLang(l){lang=l;document.documentElement.lang=l;applyLang();if(!$('#app').classList.contains('hide')){buildNav();go(view)}}
+function setRole(r){role=r;applyLang()}
+function sendCode(){$('#otp').value='4821';$('#lerr').textContent='';$('#otp').focus()}
+function doLogin(){const er=$('#lerr');
+ if($('#mob').value.replace(/\D/g,'').length!==10){er.textContent='Enter a 10-digit mobile number.';$('#mob').focus();return false}
+ if(!/^\d{4}$/.test($('#otp').value.trim())){er.textContent='Enter the 4-digit code. For this demo it is 4821.';$('#otp').focus();return false}
+ er.textContent='';$('#login').classList.add('hide');$('#app').classList.remove('hide');
+ {const q=$('#mob').value.replace(/\D/g,'');mobile=q.slice(0,5)+' '+q.slice(5)}$('#who').textContent=PR[role].name;buildNav();spd();go(role==='citizen'?'home':'desk');
+ const e=est();lastAbs=e&&e.wait<9000?T+e.wait:null;if(!timer)timer=setInterval(tick,1000);return false}
+function signOut(){$('#app').classList.add('hide');$('#login').classList.remove('hide');$('#otp').value=''}
+function buildNav(){const it=role==='citizen'?['home','token','docs','profile','notif']:['desk','profile','notif'];
+ $('#nav').innerHTML=it.map(k=>`<button data-v="${k}" onclick="go('${k}')"><span>${t('nav_'+k)}</span>${k==='notif'?'<span class="bd" id="nb"></span>':''}</button>`).join('');badge()}
+function go(v){view=v;$$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ ({home,token:tokenView,docs:docsView,notif:notifView,desk,profile:profileView})[v]();if(v==='notif'){N.forEach(x=>x.new=0);badge()}}
+function paint(){$('#clk').textContent=hm(T);badge();if(view==='home')home();else if(view==='desk')deskDyn();else if(view==='notif')notifView()}
+const capBar=()=>{const i=nextN-1;return `<div class="bar"><i style="width:${Math.min(100,i/CAP*100)}%"></i></div><p>${i} of ${CAP}, ${Math.max(0,CAP-i)} left</p>`};
+
+function chart(){let o='';for(let h=9;h<17;h++){const v=h===13?1:pf(h*60),H=v*50,x=(h-9)*40+8,cur=Math.floor(T/60)===h;
+ o+=`<rect x="${x}" y="${70-H}" width="28" height="${H}" fill="${h===13?'url(#hx)':cur?'#E8801A':'#9DB0CC'}"/><text x="${x+14}" y="84" font-size="10" text-anchor="middle" fill="#5B6B82">${h>12?h-12:h}</text>`}
+ return `<svg viewBox="0 0 330 90" width="100%" role="img" aria-label="Load multiplier by hour"><defs><pattern id="hx" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3" height="6" fill="#9DB0CC"/></pattern></defs>${o}</svg>`}
+
+function home(){const m=me(),e=est(),last=[...Q].reverse().find(x=>x.mine);let hero,why='';
+ if(!m)hero=`<div class="slip"><div><div class="lbl">${t('yourTok')}</div><div class="big sm">${last?'T-'+p(last.n):'None'}</div><span class="pill ${last?last.st:''}">${last?t('st_'+last.st):'No active token'}</span></div><div class="stub"><button class="pri" onclick="go('token')">${t('genTok')}</button></div></div>`;
+ else{const w=e.wait>=9000;
+  hero=`<div class="slip"><div><div class="lbl">${t('yourTok')}</div><div class="big">T-${p(m.n)}</div><div class="svc">${tn(m.svc)}</div>${m.slot?`<div class="lbl">${m.date&&m.date!==TD?fd(m.date)+', ':''}${t('slot')}: ${hm(m.slot)} to ${hm(m.slot+30)}</div>`:''}
+  <span class="pill ${m.st}">${m.st==='called'?t('st_called')+', '+t('counters')+' '+m.c:m.st==='serve'?t('st_serve')+', '+t('counters')+' '+m.c:t('st_'+m.st)}</span>${chk?`<span class="pill ok">${t('checkedin')}</span>`:''}
+  </div>
+  <div class="stub">${chk?'':`<button class="pri" onclick="openQR()">${t('checkin')}</button>`}<button class="sec" style="margin-top:10px" onclick="release()">${t('release')}</button></div></div>`;
+  if(m.st==='book')why='Booked ahead. Live position and wait appear on the day, and we alert you before your turn.';else if(m.st==='wait')why=w?'No counter is open, so there is no estimate yet.':`${e.nw} waiting ahead at about ${e.avg.toFixed(0)} min each, scaled by ${e.pf}x for the current hour, spread across ${e.cn} open counters, plus the ${e.ahead-e.nw} already in service. ${e.brk?'Part of this lands in the 1 to 2 PM break, so it resumes at 2:00 PM. ':''}Leave ${TR+10} minutes before your turn: ${TR} min travel plus a 10 min buffer.${m.slot?' Your slot opens at '+hm(m.slot)+'.':''}`}
+ const w2=e&&e.wait<9000,off=T<540||T>=1020?'Closed':T>=780&&T<840?'Break':'Open',sc=(c,i,l,v,x)=>`<div class="st ${c}"><span class="ic">${i}</span><div><small>${l}</small><b>${v}</b><small>${x}</small></div></div>`;
+ const stat=`<div class="stats">${sc('b','👥',t('ahead'),m&&e.wait<9000?e.ahead:'-','in queue')}${sc('p','⏱',t('wait'),m&&w2?Math.round(e.wait)+' '+t('min'):'-','approx.')}${sc('o','🕘',t('arrive'),m&&w2?hm(T+Math.max(0,e.wait-10)):'-',(m&&w2?(e.wait<=TR+10?'Leave now':'Leave by '+hm(T+e.wait-TR-10)):'-'))}${sc('g','🏛',t('office'),off,'9:00 AM to 5:00 PM')}</div>`;
+ const ln=Q.filter(x=>['serve','called','wait'].includes(x.st)).slice(0,14).map(x=>`<li class="${x.st} ${x.mine?'me':''}"><b>T-${p(x.n)}</b><small>${x.st!=='wait'?t('counters')+' '+x.c:tn(x.svc)}</small>${x.mine?'<em>You</em>':''}</li>`).join('');
+ const svs=keys.map((k,i)=>`<div class="s${i}"><span class="ic">${['📄','🚗','✅','🛂'][i]}</span><b>${tn(k)}</b><small>${t('avgtime')} ${SV[k].m.toFixed(0)} ${t('min')}, ${Q.filter(x=>x.st==='wait'&&x.svc===k).length} waiting</small><button class="gb" onclick="go('token')">${t('nav_token')} &rarr;</button></div>`).join('');
+ $('#main').innerHTML=`<div class="ban"><div><h2>${t('hello')}, Priyanka!</h2><p>Welcome to QueueLess Government Services</p><p class="sc">Digital India. A Stronger Tomorrow.</p></div><svg class="fort" viewBox="0 0 400 130" aria-hidden="true"><use href="#fort"/></svg></div>${stat}<div class="grid"><div class="col">${hero}${why?`<p class="why"><b>${t('why')}.</b> ${why}</p>`:''}
+ <div><h3>${t('queue')}</h3><ul class="lane">${ln}</ul></div><div><h3>${t('svcs')}</h3><div class="svcs">${svs}</div></div>
+ <div class="pn"><h3 style="margin-top:0">${t('peak')}</h3>${chart()}<small>Wait multiplier by hour. The hatched bar is the 1 to 2 PM break.</small></div></div>
+ <div class="col"><div class="pn"><h3 style="margin-top:0">${t('counters')}</h3>${C.map(c=>`<div class="cs ${c.active?'':'off'}"><span>${t('counters')} ${c.id}</span><b>${!c.active?'Closed':c.tok?'T-'+p(c.tok.n)+(c.tok.st==='serve'?', '+c.tok.rem+' '+t('min'):' (called)'):'Free'}</b></div>`).join('')}</div>
+ <div class="pn"><h3 style="margin-top:0">${t('capacity')}</h3>${capBar()}</div>
+ <div class="pn"><h3 style="margin-top:0">${t('recent')}</h3><ul class="log">${log.map(l=>`<li>${l.msg}<small>${hm(l.t)}</small></li>`).join('')}</ul></div></div></div><div class="assure"><span>Transparent process</span><span>Faster service</span><span>Citizen first</span><span>Digital India</span></div>`}
+
+function tokenView(){const m=me();$('#main').innerHTML=`<div class="grid2"><div class="pn"><h2>${t('genTok')}</h2>
+ ${m?`<p class="warn">You already hold T-${p(m.n)}. One active token per citizen keeps the queue fair.</p><p><button class="sec" onclick="release()">${t('release')}</button></p>`
+ :`<p><label>${t('service')}<select id="gs" onchange="docPrev()">${keys.map(k=>`<option value="${k}">${tn(k)}</option>`).join('')}</select></label></p><p class="lbl" style="margin-top:12px">${t('date')}</p><div id="cal" class="calw"></div><p id="sd" class="svc"></p><p><label>${t('slot')}<select id="gt">${slotOpts()}</select></label></p><p class="note">Each 30-minute slot holds 2 tokens. Valid today, 9:00 AM to 5:00 PM. Nothing is served during the 1 to 2 PM break.</p><p><button class="pri" onclick="newTok()">${t('genTok')}</button></p><p id="gerr" class="warn"></p>`}</div>
+ <div class="pn"><h3 style="margin-top:0">${t('capacity')}</h3>${capBar()}<h3>Bring with you</h3><ul id="dp" class="ck"></ul></div></div>`;docPrev();if($('#cal')){cm={y:TDd.getFullYear(),m:TDd.getMonth()};pickD(TD)}}
+function cal(){const y=cm.y,m=cm.m,f=new Date(y,m,1);let c='<i></i>'.repeat(f.getDay());for(let d=1;d<=new Date(y,m+1,0).getDate();d++){const dt=new Date(y,m,d),k=ymd(dt),ok=dt>=TDd&&dt<=MAXd&&dt.getDay()!==0;c+=`<button type="button" class="${k===selD?'on':''}" ${ok?'':'disabled'} onclick="pickD('${k}')">${d}</button>`}
+ $('#cal').innerHTML=`<div class="cm"><button type="button" aria-label="Previous month" onclick="mv(-1)">&lsaquo;</button><b>${f.toLocaleString('en',{month:'long',year:'numeric'})}</b><button type="button" aria-label="Next month" onclick="mv(1)">&rsaquo;</button></div><div class="cg">${[...'SMTWTFS'].map(x=>`<small>${x}</small>`).join('')}${c}</div>`}
+function mv(n){const d=new Date(cm.y,cm.m+n,1);cm={y:d.getFullYear(),m:d.getMonth()};cal()}
+function pickD(k){selD=k;cal();$('#gt').innerHTML=slotOpts(k);$('#sd').textContent=new Date(k+'T00:00').toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+(k===TD?' (today)':'')}
+const PR={citizen:{name:'Priyanka Maheta',id:'CIT-204518',city:'Rajkot, Gujarat',email:'priyanka.maheta@example.in'},staff:{name:'Counter staff',id:'STF-0117',city:'Rajkot RTO office',email:''},admin:{name:'Office administrator',id:'ADM-0003',city:'Rajkot RTO office',email:''}};
+const BANDS=[['Near the office (under 5 km)',10],['Within the city (5 to 15 km)',25],['Outskirts (15 to 40 km)',50],['Another town (40 km or more)',90]];
+function locForm(){return `<h3>Your location</h3><label>City / area<input id="pc" value="${PR.citizen.city}"></label><label style="margin-top:8px">Distance from the office<select id="pb" onchange="$('#pt').value=this.value">${BANDS.map(b=>`<option value="${b[1]}" ${b[1]===TR?'selected':''}>${b[0]}</option>`).join('')}${BANDS.some(b=>b[1]===TR)?'':`<option value="${TR}" selected>Custom</option>`}</select></label><label style="margin-top:8px">Travel time (minutes)<input id="pt" type="number" min="1" max="240" value="${TR}"></label><p class="row" style="margin-top:10px"><button class="pri" onclick="saveLoc()">Save location</button><small id="lm" role="status"></small></p><small>Your leave-by time uses this travel time plus a 10 minute buffer.</small>`}
+function saveLoc(){const c=$('#pc').value.trim(),v=Math.max(1,Math.min(240,+$('#pt').value||25));if(!c){$('#lm').textContent='Enter your city or area.';return}PR.citizen.city=c;TR=v;near=false;$('#lm').textContent='Saved. Leave-by now allows '+v+' min travel.'}
+function profileView(){const u=PR[role],mk=Q.filter(x=>x.mine);
+ $('#main').innerHTML=`<h2 style="margin-bottom:14px">${t('nav_profile')}</h2><div class="grid2"><div class="pn"><div class="row" style="margin-bottom:8px"><span class="ic av">${u.name[0]}</span><div><h3 style="margin:0">${u.name}</h3><small>${t('role_'+role)}, ${u.id}</small></div></div>${[['Mobile','+91 '+mobile],['Email',u.email||'-'],['Office / city',u.city],['Language',{en:'English',gu:'ગુજરાતી',hi:'हिन्दी'}[lang]],['Verification','Mobile verified by one-time code']].map(r=>`<div class="cs"><small>${r[0]}</small><b>${r[1]}</b></div>`).join('')}${role==='citizen'?locForm():''}</div>
+ <div class="pn"><h3 style="margin-top:0">My tokens</h3>${mk.length?mk.map(x=>`<div class="cs"><span><b>T-${p(x.n)}</b> ${tn(x.svc)}<small style="display:block">${fd(x.date||TD)}${x.slot?', '+hm(x.slot)+' to '+hm(x.slot+30):''}</small></span><span class="pill ${x.st}">${t('st_'+x.st)}</span></div>`).join(''):'<p class="note">No tokens yet.</p>'}</div></div>`}
+function docPrev(){const s=$('#gs'),m=me(),k=s?s.value:m?m.svc:'birth';$('#dp').innerHTML=SV[k].docs.map((d,i)=>`<li class="${DOCS[k+i]?'on':''}" onclick="DOCS['${k+i}']=!DOCS['${k+i}'];docPrev()">${d}</li>`).join('')}
+function newTok(){const dt=selD,sl=+$('#gt').value,fut=dt!==TD,svc=$('#gs').value,er=$('#gerr');
+ if(issuedOn(dt)>=CAP){er.textContent='That date is full. Pick another date.';return}
+ if(fut&&!sl){er.textContent='Pick a time slot.';return}
+ if(sl&&slotN(sl,dt)>=SLOTCAP){er.textContent='That slot just filled up. Pick another.';return}
+ const n=fut?100+Q.filter(x=>x.date===dt).length+1:nextN++;Q.push({n,svc,src:'online',st:fut?'book':'wait',mine:true,slot:sl,date:dt});chk=false;near=false;
+ const e=est();lastAbs=!fut&&e.wait<9000?T+e.wait:null;
+ say(`Token T-${p(n)} generated for ${tn(svc)}, ${fut?fd(dt)+', ':''}${sl?hm(sl)+' to '+hm(sl+30):'first available'}.${fut?' Live tracking starts on that day.':' Estimated wait about '+Math.round(e.wait)+' min.'}`,'ok');go('home')}
+function release(){const m=me();if(!m)return;m.st='cancel';C.forEach(c=>{if(c.tok===m)c.tok=null});lg(`T-${p(m.n)} released by citizen`);go('token')}
+function docsView(){$('#main').innerHTML=`<h2 style="margin-bottom:14px">${t('nav_docs')}</h2><div class="cards">${keys.map(k=>`<div class="pn"><h3 style="margin-top:0">${tn(k)}</h3><ul class="ck">${SV[k].docs.map((d,i)=>`<li class="${DOCS[k+i]?'on':''}" onclick="DOCS['${k+i}']=!DOCS['${k+i}'];docsView()">${d}</li>`).join('')}</ul><small>${SV[k].docs.filter((d,i)=>DOCS[k+i]).length} of ${SV[k].docs.length} ready</small></div>`).join('')}</div><p class="note">Tick what you have. Staff confirm originals at the counter.</p>`}
+function notifView(){$('#main').innerHTML=`<h2 style="margin-bottom:14px">${t('nav_notif')}</h2>${N.map(x=>`<div class="nt ${x.k}">${x.msg}<br><small>${hm(x.t)}</small></div>`).join('')}`}
+
+function desk(){$('#main').innerHTML=`<div class="top2"><h2>${t('nav_desk')}</h2><label class="row" style="flex-direction:row"><input type="checkbox" id="au" ${auto?'checked':''} onchange="auto=this.checked" style="flex:0"> Auto-call next token</label>
+ ${role==='admin'?`<label class="row" style="flex-direction:row">Daily capacity <input type="number" min="1" max="99" value="${CAP}" style="max-width:80px;flex:0" onchange="CAP=+this.value||20;deskDyn()"></label>`:''}
+ <span class="row"><select id="ws">${keys.map(k=>`<option value="${k}">${tn(k)}</option>`).join('')}</select><button class="sec" onclick="walkin()">${t('walkin')}</button></span></div><div id="dd"></div>`;deskDyn()}
+function deskDyn(){if(!$('#dd'))return;const act=Q.filter(x=>['serve','called','wait'].includes(x.st));
+ $('#dd').innerHTML=`<div class="pn"><h3 style="margin-top:0">${t('capacity')}</h3>${capBar()}</div><div class="cards">${C.map((c,i)=>`<div class="pn"><div class="cs"><b>${t('counters')} ${c.id}</b><button class="sec" onclick="C[${i}].active=!C[${i}].active;deskDyn()">${c.active?'Close':'Open'}</button></div>
+ <div class="n2" style="margin-top:8px">${!c.active?'Closed':c.tok?'T-'+p(c.tok.n):'Free'}</div><small>${c.tok?tn(c.tok.svc)+(c.tok.st==='called'?', waiting for check-in ('+c.tok.grace+' min grace)':', '+c.tok.rem+' '+t('min')+' left'):''}</small>
+ <p>${c.tok&&c.tok.st==='serve'?`<button class="pri" onclick="fin(C[${i}]);deskDyn()">${t('complete')}</button>`:!c.tok&&c.active?`<button class="pri" onclick="callNext(C[${i}]);deskDyn()">${t('callnext')}</button>`:''}</p></div>`).join('')}</div>
+ <div class="pn"><table><tr><th>Token</th><th>${t('service')}</th><th>Slot</th><th>Source</th><th>Status</th></tr>${act.map(x=>`<tr><td><b>T-${p(x.n)}</b>${x.mine?' (citizen demo)':''}</td><td>${tn(x.svc)}</td><td>${x.slot?hm(x.slot):'Now'}</td><td>${x.src==='online'?'Online':'Walk-in'}</td><td>${t('st_'+x.st)}</td></tr>`).join('')}</table></div>`}
+function walkin(){if(nextN-1>=CAP){toast('Daily capacity reached. Admin can raise it.');return}const n=nextN++;Q.push({n,svc:$('#ws').value,src:'walk-in',st:'wait'});lg(`T-${p(n)} issued at the counter`);deskDyn()}
+
+function qr(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619)>>>0;const n=25;let o='';
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){let b;
+  if((x<7&&y<7)||(x>=n-7&&y<7)||(x<7&&y>=n-7)){const a=Math.max(Math.abs((x<7?x:x-n+7)-3),Math.abs((y<7?y:y-n+7)-3));b=a===3||a<=1}
+  else{h=Math.imul(h^(h>>>15),2246822519)>>>0;b=h&1}
+  if(b)o+=`<rect x="${x}" y="${y}" width="1" height="1"/>`}
+ return `<svg viewBox="-1 -1 ${n+2} ${n+2}" width="180" height="180" shape-rendering="crispEdges"><rect x="-1" y="-1" width="${n+2}" height="${n+2}" fill="#fff"/><g fill="#12203A">${o}</g></svg>`}
+function openQR(){const m=me();if(!m)return;const md=$('#modal');md.classList.remove('hide');
+ md.innerHTML=`<div class="box" role="dialog" aria-modal="true"><h3 style="margin-top:0">${t('checkin')}</h3><div class="qrw">${qr('QL|'+p(m.n)+'|'+m.svc)}</div><p class="note">The office scanner checks the token, your login and the service together, so a copied or reused token fails.</p><ul id="vr" class="ck"></ul><p class="row"><button class="pri" id="scan" onclick="scanQR()">Simulate office scan</button><button class="sec" onclick="closeM()">Close</button></p></div>`}
+function scanQR(){const rows=['Token is valid for today','Citizen matches the signed-in account','Service matches the counter list','No earlier check-in on this token'];let i=0;$('#scan').disabled=true;
+ const id=setInterval(()=>{$('#vr').insertAdjacentHTML('beforeend',`<li class="on">${rows[i++]}</li>`);if(i===rows.length){clearInterval(id);chk=true;say('Checked in. Your place in the queue is confirmed.','ok');setTimeout(()=>{closeM();paint()},900)}},350)}
+function closeM(){$('#modal').classList.add('hide')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+applyLang();
+</script></body></html>
